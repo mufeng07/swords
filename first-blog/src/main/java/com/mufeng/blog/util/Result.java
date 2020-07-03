@@ -22,6 +22,12 @@ public class Result<T> implements Serializable {
         this.message = message;
     }
 
+    public Result(int resultCode, String message, T data) {
+        this.resultCode = resultCode;
+        this.message = message;
+        this.data=data;
+    }
+
     public int getResultCode() {
         return resultCode;
     }
@@ -44,6 +50,13 @@ public class Result<T> implements Serializable {
 
     public void setData(T data) {
         this.data = data;
+    }
+
+    public static <T> Result rspSucc(T data){
+        return new Result(0,"成功",data);
+    }
+    public static Result rspSucc(){
+        return new Result(0,"成功",null);
     }
 
     @Override
