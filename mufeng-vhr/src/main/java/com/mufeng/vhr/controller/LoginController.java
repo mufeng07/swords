@@ -1,7 +1,9 @@
 package com.mufeng.vhr.controller;
 
+import com.mufeng.vhr.beans.RespBean;
 import com.mufeng.vhr.config.VerificationCode;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +19,7 @@ import java.io.IOException;
  */
 @RestController
 public class LoginController {
+
     @GetMapping("/verifyCode")
     public void verifyCode(HttpServletRequest request, HttpServletResponse resp) throws IOException {
         VerificationCode code = new VerificationCode();
@@ -25,5 +28,9 @@ public class LoginController {
         HttpSession session = request.getSession(true);
         session.setAttribute("verify_code", text);
         VerificationCode.output(image,resp.getOutputStream());
+    }
+    @GetMapping("/login")
+    public RespBean login() {
+        return RespBean.error("尚未登录，请登录!");
     }
 }
